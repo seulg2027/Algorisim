@@ -33,8 +33,6 @@ def Beam_i(n, beam, column_data):
         if column_data[x][y] == 1 or column_data[x][y+1] == 1:
             beam_data[x][y] += 2
             beam_data[x][y+1] += 1
-    print(column_data)
-    print(beam_data)
 
 
 def solution(n, build_frame):
@@ -57,3 +55,36 @@ def solution(n, build_frame):
 
 
 solution(n, build_frame)
+
+
+## 답안 예시
+
+# 현재 설치된 구조물 -> 가능한 구조물인지? 확인하는 함수
+# 이걸 놓쳐버림...... 허어어 아예 만들 때 이걸 고려해서 만드려고 했는데 만들고 나서 확인하는 거였다니... 우ㅠㅠㅠㅠ
+# 그리고 기둥과 보 데이터를 다 만들 필요는 없다 result만 반환해주면 되지!
+def possible(answer):
+    for x, y, stuff in answer:
+        if stuff == 0: # 기둥인 경우
+            # '바닥 위' or '보 한쪽 끝부분 위' or '다른 기둥 위'
+            if y == 0 or [x-1, y-1] in answer or [x, y, 1] in answer or [x, y-1, 0] in answer:
+                continue
+            return False
+        elif stuff == 1: # 보인 경우
+            if [x, y-1] in answer or [x+1, y-1, 0] in answer or ([x-1, y, 1] in answer and [x+1, y, 1] in answer):
+                continue
+            return False
+        return True
+
+def solution(n, build_frame):
+    answer = []
+    for frame in build_frame:
+        x, y, stuff, operate = frame # 와 이렇게 한꺼번에 할당할 수 있구나
+        if operate == 0: # 삭제하는 함수
+            answer.remove([x, y, stuff])
+            if not possible(answer): # 직관적으로 코드가 나와서 좋넹
+                answer.append([x, y, stuff])
+        if operate == 1:
+            answer.append([x, y, stuff])
+            if not possible(answer):
+                answer.remove([x, y, stuff])
+    return sorted(answer)
