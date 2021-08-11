@@ -6,13 +6,18 @@ data = []
 for i in range(n):
   data.append(list(map(int, input().split())))
 
-dp = []
-index = 1
-result = data[0][0]
-
 for i in range(1, n):
-  index += 1
-  for j in range(0, index):
-    result += max(data[i][j], data[i][j+1])
+  for j in range(i+1):
+    # 오른쪽 위
+    if j == i:
+      right_up = 0
+    else:
+      right_up = data[i-1][j]
+    # 왼쪽 위
+    if j == 0:
+      left_up = 0
+    else:
+      left_up = data[i-1][j-1]
+    data[i][j] = data[i][j] + max(left_up, right_up)
 
-print(dp)
+print(max(data[n-1]))
