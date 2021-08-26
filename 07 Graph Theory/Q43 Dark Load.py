@@ -1,5 +1,7 @@
 # Q43 어두운 길
 
+
+# 내가 푼 방법 (답지와 같음..)
 N, M = map(int, input().split())
 
 def find_parent(parent, x):
@@ -31,12 +33,14 @@ for i in range(M):
 edges.sort()
 # 비용을 더할 변수
 result = 0
+total = 0
 
 # 비용을 돌아봄
 for edge in edges:
   cost, a, b = edge
+  total += cost
   if find_parent(parent, a) != find_parent(parent, b): # 만약 아직 집합연산이 안 일어났다면
     union_parent(parent, a, b) # 집합 실행
     result += cost # 비용 추가
 
-print(result)
+print(total - result)
