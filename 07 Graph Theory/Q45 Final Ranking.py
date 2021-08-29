@@ -26,6 +26,7 @@ def topology_sort(N):
     result.reverse()
     for i in result:
       print(i, end=' ')
+    print()
   else: # 정렬된 결과로 찾지 못하면 ? 출력
     print("?")
 

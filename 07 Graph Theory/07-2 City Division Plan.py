@@ -1,6 +1,8 @@
 # 07-2 도시 분할 계획
 
 # 내가 푼 방법
+import sys
+input = sys.stdin.readline
 N, M = map(int, input().split())
 
 parent = [0] * (N+1)
@@ -28,6 +30,7 @@ for _ in range(M):
 
 edges.sort()
 result = 0
+last = 0
 
 for edge in edges:
   cost, a, b = edge
@@ -36,8 +39,8 @@ for edge in edges:
   b = find_parent(parent, b)
   if a != b:
     # 각 노드의 루트노드를 갖는 노드가 전체 집합을 이루지 않을 경우만
-    if parent.count(a) + parent.count(b) != N:
-      union_parent(parent, a, b)
-      result += cost
+    last = cost
+    union_parent(parent, a, b)
+    result += cost
 
-print(result)
+print(result - last)
