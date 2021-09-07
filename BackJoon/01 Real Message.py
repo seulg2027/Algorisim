@@ -18,14 +18,12 @@ for i in range(int(input())):
     word = q.popleft()
     if message.count(word) % 3 == 0:
       result.append(False) # 진짜 메세지가 아닌 경우
-      break
+      break # 반복문 종료하고 다음 word를 보지 않는다.
     # 마지막 글자
     if not q:
       # result 리스트 해당 테스트 케이스에 false가 들어가있지 않은 경우
-      if len(result) - 1 < i:
-        result.append(True)
-        break # 이거 안해주면 while문을 다시 돎... why...
-      break
+      result.append(True)
+      break # 이거 안해주면 while문을 다시 돎... why...
 
 # 한번에 출력하기
 for i in range(len(result)):
