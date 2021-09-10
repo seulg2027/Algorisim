@@ -3,7 +3,9 @@
 
 # 내가 푼 풀이
 # 이건 런타임 에러^^ 이러다 문제 모든 에러 다 수집하겠네ㅎㅎ
+import sys
 import copy
+sys.setrecursionlimit(1000000)
 
 n = int(input())
 height_data = []

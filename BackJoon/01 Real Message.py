@@ -16,7 +16,8 @@ for i in range(int(input())):
       q.append(alphabet)
   while q: # 큐가 다 빌때까지 반복
     word = q.popleft()
-    if message.count(word) % 3 == 0:
+    cnt = message.count(word)
+    if cnt % 3 == 0 and cnt % 12 != 0:
       result.append(False) # 진짜 메세지가 아닌 경우
       break # 반복문 종료하고 다음 word를 보지 않는다.
     # 마지막 글자

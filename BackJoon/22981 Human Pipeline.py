@@ -9,11 +9,11 @@ data.sort()
 
 def team_divide():
   global k
-  critial = n // 2 - 1 # 팀 나누는 구분선
+  critial = 0 # 팀 나누는 구분선
   work_speed = 0
   while critial < n - 1:
-    team_left = [data[i] for i in range(0, critial+1)] # 왼쪽 팀
-    team_right = [data[i] for i in range(critial+1, n)] # 오른쪽 팀
+    team_left = data[0:critial+1] # 왼쪽 팀 # 슬라이싱
+    team_right = data[critial+1:n] # 오른쪽 팀 # 슬라이싱
     min_left = team_left[0]
     min_right = team_right[0]
     value = min_left * (critial + 1) + min_right * (n - critial - 1)
