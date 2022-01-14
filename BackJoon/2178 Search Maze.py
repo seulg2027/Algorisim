@@ -1,24 +1,29 @@
 # 미로 탐색
 
-import sys
-sys.setrecursionlimit(100000)
+from collections import deque
 
-n, m = map(int, sys.stdin.readline().split())
-maze = [list(map(int,sys.stdin.readline().strip())) for i in range(n)]
+n, m = map(int, input().split())
+graph = []
 
-def dfs(x, y, n, m, result):
-  if x == n-1 and y == m-1:
-    print(result)
-    return result
-  if x <= -1 or x >= n or y <= -1 or y >= m:
-    return False
-  if maze[x][y] == 1:
-    result += 1
-    dfs(x-1, y, n, m, result)
-    dfs(x, y-1, n, m, result)
-    dfs(x+1, y, n, m, result)
-    dfs(x, y+1, n, m, result)
-    return result
-  return False
+dx = [1, 0, -1, 0]
+dy = [0, 1, 0, -1]
 
-dfs(0, 0, n, m, 0)
+def bfs():
+  global n, m
+  queue = deque()
+  queue.append((0, 0))
+  while queue:
+    x, y = queue.popleft()
+    for i in range(4):
+      nx = dx[i] + x
+      ny = dy[i] + y
+      if -1 < nx < n and -1 < ny < m:
+        if graph[nx][ny] == 1:
+          queue.append((nx, ny))
+          graph[nx][ny] += graph[x][y]
+
+for _ in range(n):
+  graph.append(list(map(int, input())))
+
+bfs()
+print(graph[n-1][m-1])
