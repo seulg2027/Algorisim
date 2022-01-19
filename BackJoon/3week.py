@@ -34,31 +34,50 @@
 # for re in result:
 #   print(re) 
 
-# 올림픽
+# # 올림픽
 
+# import sys
+
+# n, k = map(int, sys.stdin.readline().split())
+# data = []
+# ranks = [1e9] * n
+
+# for i in range(n):
+#   glo, gold, sliver, bronze = map(int, sys.stdin.readline().split())
+#   data.append([glo, gold, sliver, bronze])
+# sorted_medal = sorted(data, key=lambda x:(-x[1], -x[2], -x[3]))
+
+# rank = 0
+
+# for j in range(n):
+#   if k == j:
+#     print(ranks[k-1])
+#     break
+#   start = sorted_medal[j]
+#   end = sorted_medal[j+1]
+#   if start[1] == end[1] and start[2] == end[2] and start[3] == end[3]:
+#     rank += 1
+#     ranks[j] = min(rank, ranks[j])
+#     ranks[j+1] = ranks[j]
+#   else:
+#     rank += 1
+#     ranks[j] = min(rank, ranks[j])
+
+# 1431 시리얼 번호
 import sys
-
-n, k = map(int, sys.stdin.readline().split())
 data = []
-ranks = [1e9] * n
 
-for i in range(n):
-  glo, gold, sliver, bronze = map(int, sys.stdin.readline().split())
-  data.append([glo, gold, sliver, bronze])
-sorted_medal = sorted(data, key=lambda x:(-x[1], -x[2], -x[3]))
+for i in range(int(sys.stdin.readline().rstrip())):
+  st = sys.stdin.readline().rstrip()
+  cnt = 0
+  for j in st:
+    try:
+      cnt += int(j)
+    except:
+      continue
+  data.append((st, cnt))
 
-rank = 0
+data = sorted(data, key=lambda x: (len(x[0]), x[1], x[0]))
 
-for j in range(n):
-  if k == j:
-    print(ranks[k-1])
-    break
-  start = sorted_medal[j]
-  end = sorted_medal[j+1]
-  if start[1] == end[1] and start[2] == end[2] and start[3] == end[3]:
-    rank += 1
-    ranks[j] = min(rank, ranks[j])
-    ranks[j+1] = ranks[j]
-  else:
-    rank += 1
-    ranks[j] = min(rank, ranks[j])
+for item in data:
+  print(item[0])
