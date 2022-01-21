@@ -37,47 +37,85 @@
 # # 올림픽
 
 # import sys
+# input = sys.stdin.readline
+# n, k = map(int, input().split())
+# s = []
+# for i in range(n):
+#   s.append(list(map(int, input().split())))
+# s.sort(key=lambda x : (-x[1], -x[2], -x[3]))
+# for i in range(n):
+#   if s[i][0] == k:
+#     index = i
+# for i in range(n):
+#   if s[index][1:] == s[i][1:]:
+#     print(i + 1)
+#     break
 
-# n, k = map(int, sys.stdin.readline().split())
+# # 1431 시리얼 번호
+# import sys
 # data = []
-# ranks = [1e9] * n
+
+# for i in range(int(sys.stdin.readline().rstrip())):
+#   st = sys.stdin.readline().rstrip()
+#   cnt = 0
+#   for j in st:
+#     try:
+#       cnt += int(j)
+#     except:
+#       continue
+#   data.append((st, cnt))
+
+# data = sorted(data, key=lambda x: (len(x[0]), x[1], x[0]))
+
+# for item in data:
+#   print(item[0])
+
+# # 10814 나이순 정렬
+# n = int(input())
+# data = []
 
 # for i in range(n):
-#   glo, gold, sliver, bronze = map(int, sys.stdin.readline().split())
-#   data.append([glo, gold, sliver, bronze])
-# sorted_medal = sorted(data, key=lambda x:(-x[1], -x[2], -x[3]))
+#   age, mem = map(str, input().split())
+#   data.append((int(age), mem))
 
-# rank = 0
+# data = sorted(data, key=lambda x: x[0])
 
 # for j in range(n):
-#   if k == j:
-#     print(ranks[k-1])
-#     break
-#   start = sorted_medal[j]
-#   end = sorted_medal[j+1]
-#   if start[1] == end[1] and start[2] == end[2] and start[3] == end[3]:
-#     rank += 1
-#     ranks[j] = min(rank, ranks[j])
-#     ranks[j+1] = ranks[j]
-#   else:
-#     rank += 1
-#     ranks[j] = min(rank, ranks[j])
+#   print(data[j][0], data[j][1])
 
-# 1431 시리얼 번호
-import sys
-data = []
+# # 2910 빈도 정렬
+# import sys
 
-for i in range(int(sys.stdin.readline().rstrip())):
-  st = sys.stdin.readline().rstrip()
-  cnt = 0
-  for j in st:
-    try:
-      cnt += int(j)
-    except:
-      continue
-  data.append((st, cnt))
+# n, c = map(int, sys.stdin.readline().split())
+# data = list(map(int, sys.stdin.readline().split()))
 
-data = sorted(data, key=lambda x: (len(x[0]), x[1], x[0]))
+# dic = dict()
 
-for item in data:
-  print(item[0])
+# for idx in data:
+#   if idx not in dic:
+#     dic[idx] = 0
+#   dic[idx] += 1
+
+# dic = sorted(dic.items(), key=lambda x: x[1], reverse=True)
+
+# for x, y in dic:
+#   for _ in range(y):
+#     print(x, end=' ')
+
+# # 11399 ATM
+# import sys
+
+# n = int(sys.stdin.readline())
+# data = list(map(int, sys.stdin.readline().split()))
+# data.sort()
+# cal = [0] * n
+
+# for idx in range(n):
+#   for j in data[:idx+1]:
+#     cal[idx] += j
+
+# result = 0
+# for item in cal:
+#   result += item
+
+# print(result)
