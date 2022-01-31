@@ -35,7 +35,7 @@
 # X, Y = map(int, input().split())
 # Z = (Y * 100) // X
 
-# if Z >= 99:
+# if X >= 99:
 #   print(-1)
 # else:
 #   answer = 0
