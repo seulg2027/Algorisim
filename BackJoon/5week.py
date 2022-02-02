@@ -45,16 +45,61 @@
 
 # print(fibo())
 
-# 피보나치 수 
+# # 답지 코드
 
-N = int(input())
+# N = int(input())
 
-mod = 1000000
-fibo = [0, 1]
-p = mod // 10 * 15
+# mod = 1000000
+# fibo = [0, 1]
+# p = mod // 10 * 15
 
-for i in range(2,p):
-  fibo.append(fibo[i-1]+fibo[i-2])
-  fibo[i] %= mod
+# for i in range(2,p):
+#   fibo.append(fibo[i-1]+fibo[i-2])
+#   fibo[i] %= mod
 
-print(fibo[N%p])
+# print(fibo[N%p])
+
+# 계단 오르기
+
+import sys
+input = sys.stdin.readline
+
+# n = int(input())
+# scores = [int(input()) for _ in range(n)]
+# visited = [False for _ in range(n+1)]
+
+# def max_score(idx):
+#   if idx == n-2 or idx == n-3:
+#     scores[n-1] += max(scores[n-2], scores[n-3])
+#     return scores[n-1]
+#   if scores[idx+1] > scores[idx+2]:
+#     if idx >= 1 and visited[idx-1] == True:
+#       visited[idx+2] = True
+#       scores[idx+2] += scores[idx]
+#       max_score(idx+2)
+#     else:
+#       visited[idx+1] = True
+#       scores[idx+1] += scores[idx]
+#       max_score(idx+1)
+#   elif scores[idx+1] <= scores[idx+2]:
+#     visited[idx+2] = True
+#     scores[idx+2] += scores[idx]
+#     max_score(idx+2)
+
+# if n <= 2:
+#   print(scores[0] + scores[1])
+# else:
+#   max_score(0)
+#   print(scores[n-1])
+
+# 답지
+# n = int(input())
+# scores = [0] + [int(input()) for _ in range(n)] + [0]
+# cache = [0] * (n+2)
+# cache[1] = scores[1]
+# cache[2] = cache[1] + scores[2]
+
+# for i in range(3, n+1):
+#   cache[i] = max(cache[i-2], cache[i-3] + scores[i-1]) + scores[i]
+
+# print(cache[n])
