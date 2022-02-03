@@ -61,8 +61,8 @@
 
 # 계단 오르기
 
-import sys
-input = sys.stdin.readline
+# import sys
+# input = sys.stdin.readline
 
 # n = int(input())
 # scores = [int(input()) for _ in range(n)]
@@ -103,3 +103,47 @@ input = sys.stdin.readline
 #   cache[i] = max(cache[i-2], cache[i-3] + scores[i-1]) + scores[i]
 
 # print(cache[n])
+
+# # 퇴사
+
+# import sys
+# input = sys.stdin.readline
+
+# n = int(input())
+# T = []
+# P = []
+
+# for _ in range(n):
+#   t, p = map(int, input().split())
+#   T.append(t)
+#   P.append(p)
+
+# dp = [0] * (n+1)
+# max_value = 0
+
+# for i in range(n-1, -1, -1):
+#   time = T[i] + i
+#   if time <= n: # 먼저 time 범위부터 확인
+#     dp[i] = max(max_value, P[i] + dp[time]) # 새로운 상담 값 + dp값 과 이전 최대 상담값을 비교하기
+#     max_value = dp[i]
+#   else:
+#     dp[i] = max_value
+
+# print(max_value)
+
+# 1로 만들기
+
+import sys
+input = sys.stdin.readline
+
+n = int(input())
+d = [0] * 1000001
+
+for i in range(2, n+1):
+  d[i] = d[i-1] + 1
+  if i % 3 == 0:
+    d[i] = min(d[i], d[i//3] + 1)
+  if i % 2 == 0:
+    d[i] = min(d[i], d[i//2] + 1)
+
+print(d[n])
