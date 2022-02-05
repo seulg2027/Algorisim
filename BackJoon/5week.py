@@ -131,19 +131,37 @@
 
 # print(max_value)
 
-# 1로 만들기
+# # 1로 만들기
+
+# import sys
+# input = sys.stdin.readline
+
+# n = int(input())
+# d = [0] * 1000001
+
+# for i in range(2, n+1):
+#   d[i] = d[i-1] + 1
+#   if i % 3 == 0:
+#     d[i] = min(d[i], d[i//3] + 1)
+#   if i % 2 == 0:
+#     d[i] = min(d[i], d[i//2] + 1)
+
+# print(d[n])
+
+# 평범한 배낭
 
 import sys
 input = sys.stdin.readline
 
-n = int(input())
-d = [0] * 1000001
+n, k = map(int, input().split())
+data = [[0] * (k + 1) for _ in range(n + 1)]
 
-for i in range(2, n+1):
-  d[i] = d[i-1] + 1
-  if i % 3 == 0:
-    d[i] = min(d[i], d[i//3] + 1)
-  if i % 2 == 0:
-    d[i] = min(d[i], d[i//2] + 1)
+for i in range(1, n + 1):
+  w, v = map(int, input().split())
+  for j in range(k + 1):
+    if j < w:
+      data[i][j] = data[i-1][j]
+    else:
+      data[i][j] = max(data[i-1][j], data[i-1][j-w] + v)
 
-print(d[n])
+print(data[n][k])
