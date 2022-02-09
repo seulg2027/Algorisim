@@ -91,39 +91,72 @@
 
 # print(max(result[1:]))
 
-# 1753 최단 경로
+# # 1753 최단 경로
 
-import heapq
+# import heapq
+# import sys
+# input = sys.stdin.readline
+
+# v, e = map(int, input().split())
+# k = int(input())
+# graph = [[] for _ in range(v+1)]
+# distance = [int(1e9)] * (v+1)
+
+# for _ in range(e):
+#   start, end, weight = map(int, input().split())
+#   graph[start].append((end, weight))
+
+# def dijkstra(k):
+#   q = []
+#   heapq.heappush(q, (0, k))
+#   distance[k] = 0
+#   while q:
+#     dist, now = heapq.heappop(q)
+#     if distance[now] < dist:
+#       continue
+#     for item in graph[now]:
+#       cost = dist + item[1]
+#       if cost < distance[item[0]]:
+#         distance[item[0]] = cost
+#         heapq.heappush(q, (cost, item[0]))
+
+# dijkstra(k)
+
+# for data in distance[1:]:
+#   if data == int(1e9):
+#     print("INF")
+#   else:
+#     print(data)
+
+# 17396 백도어
+
 import sys
+import heapq
+inf=sys.maxsize
 input = sys.stdin.readline
 
-v, e = map(int, input().split())
-k = int(input())
-graph = [[] for _ in range(v+1)]
-distance = [int(1e9)] * (v+1)
+n, m = map(int, input().split())
+alarm = list(map(int, input().split()))
+alarm[-1] = 0
+graph = [[] for _ in range(n)]
+distance = [inf for _ in range(n)]
 
-for _ in range(e):
-  start, end, weight = map(int, input().split())
-  graph[start].append((end, weight))
+for _ in range(m):
+  a, b, time = map(int, input().split())
+  graph[a].append((b, time))
+  graph[b].append((a, time))
 
-def dijkstra(k):
-  q = []
-  heapq.heappush(q, (0, k))
-  distance[k] = 0
-  while q:
-    dist, now = heapq.heappop(q)
-    if distance[now] < dist:
-      continue
-    for item in graph[now]:
-      cost = dist + item[1]
-      if cost < distance[item[0]]:
-        distance[item[0]] = cost
-        heapq.heappush(q, (cost, item[0]))
+q = []
+heapq.heappush(q, (0, 0))
+distance[0] = 0
+while q:
+  dist, now = heapq.heappop(q)
+  if distance[now] < dist:
+    continue
+  for i in graph[now]:
+    cost = dist + i[1]
+    if cost < distance[i[0]] and alarm[i[0]] == 0:
+      distance[i[0]] = cost
+      heapq.heappush(q, (cost, i[0]))
 
-dijkstra(k)
-
-for data in distance[1:]:
-  if data == int(1e9):
-    print("INF")
-  else:
-    print(data)
+print(distance[n-1]) if distance[n-1] < inf else print(-1)
