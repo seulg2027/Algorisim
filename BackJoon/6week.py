@@ -1,23 +1,37 @@
-# # 1932 정수 삼각형
+# # 11404 플로이드
 
 # import sys
 # input = sys.stdin.readline
 
+# INF = int(1e9)
+
 # n = int(input())
-# triangle = []
-# for _ in range(n):
-#   triangle += [list(map(int, input().split()))]
+# m = int(input())
+# dist = [[INF] *(n+1) for _ in range(n+1)]
 
-# for i in range(1, n):
-#   for j in range(i + 1):
-#     if j == 0:
-#       triangle[i][j] += triangle[i-1][0]
-#     elif j == i:
-#       triangle[i][j] += triangle[i-1][j-1]
-#     else:
-#       triangle[i][j] += max(triangle[i-1][j-1], triangle[i-1][j])
+# # 자기자신 거리 설정
+# for i in range(1, n+1):
+#   for j in range(1, n+1):
+#     if i == j:
+#       dist[i][j] = 0
 
-# print(max(triangle[n-1]))
+# for _ in range(m):
+#   a, b, c = map(int, input().split())
+#   if dist[a][b] > c:
+#     dist[a][b] = c
+
+# for a in range(1, n+1):
+#   for b in range(1, n+1):
+#     for c in range(1, n+1):
+#       dist[b][c] = min(dist[b][c], dist[b][a] + dist[a][c])
+
+# for i in range(1, n+1):
+#   for j in range(1, n+1):
+#     if dist[i][j] != INF:
+#       print(dist[i][j], end=" ")
+#     else: # 만약 못 갈경우
+#       print(0, end=" ")
+#   print()
 
 # # 1238 파티
 
@@ -128,35 +142,100 @@
 #   else:
 #     print(data)
 
-# 17396 백도어
+# # 17396 백도어
 
-import sys
+# import sys
+# import heapq
+# inf=sys.maxsize
+# input = sys.stdin.readline
+
+# n, m = map(int, input().split())
+# alarm = list(map(int, input().split()))
+# alarm[-1] = 0
+# graph = [[] for _ in range(n)]
+# distance = [inf for _ in range(n)]
+
+# for _ in range(m):
+#   a, b, time = map(int, input().split())
+#   graph[a].append((b, time))
+#   graph[b].append((a, time))
+
+# q = []
+# heapq.heappush(q, (0, 0))
+# distance[0] = 0
+# while q:
+#   dist, now = heapq.heappop(q)
+#   if distance[now] < dist:
+#     continue
+#   for i in graph[now]:
+#     cost = dist + i[1]
+#     if cost < distance[i[0]] and alarm[i[0]] == 0:
+#       distance[i[0]] = cost
+#       heapq.heappush(q, (cost, i[0]))
+
+# print(distance[n-1]) if distance[n-1] < inf else print(-1)
+
+# # 6118 숨바꼭질
+
+# import sys
+# import heapq
+# input = sys.stdin.readline
+# INF = sys.maxsize
+
+# n, m = map(int, input().split())
+# graph = [[] for _ in range(n+1)]
+# distance = [INF for _ in range(n+1)]
+
+# for _ in range(m):
+#   a, b = map(int, input().split())
+#   graph[a].append(b)
+#   graph[b].append(a)
+
+# queue = []
+# heapq.heappush(queue, (0, 1))
+# distance[1] = 0
+# while queue:
+#   dist, now = heapq.heappop(queue)
+#   if distance[now] < dist:
+#     continue
+#   for i in graph[now]:
+#     cost = dist + 1
+#     if cost < distance[i]:
+#       distance[i] = cost
+#       heapq.heappush(queue, (cost, i))
+
+# max_distance = max(distance[1:])
+# max_idx = distance.index(max_distance)
+# cnt = distance.count(max_distance)
+# print(max_idx, max_distance, cnt)
+
+# 1916 최소비용 구하기
+
 import heapq
-inf=sys.maxsize
+import sys
 input = sys.stdin.readline
+INF = sys.maxsize
 
-n, m = map(int, input().split())
-alarm = list(map(int, input().split()))
-alarm[-1] = 0
-graph = [[] for _ in range(n)]
-distance = [inf for _ in range(n)]
-
+n = int(input())
+m = int(input())
+graph = [[] for _ in range(n+1)]
+distance = [INF for _ in range(n+1)]
 for _ in range(m):
-  a, b, time = map(int, input().split())
-  graph[a].append((b, time))
-  graph[b].append((a, time))
+  a, b, ti = map(int, input().split())
+  graph[a].append((b, ti))
+start, end = map(int, input().split())
 
 q = []
-heapq.heappush(q, (0, 0))
-distance[0] = 0
+heapq.heappush(q, (0, start))
+distance[start] = 0
 while q:
   dist, now = heapq.heappop(q)
   if distance[now] < dist:
     continue
-  for i in graph[now]:
-    cost = dist + i[1]
-    if cost < distance[i[0]] and alarm[i[0]] == 0:
-      distance[i[0]] = cost
-      heapq.heappush(q, (cost, i[0]))
+  for b, ti in graph[now]:
+    cost = dist + ti
+    if cost < distance[b]:
+      distance[b] = cost
+      heapq.heappush(q, (cost, b))
 
-print(distance[n-1]) if distance[n-1] < inf else print(-1)
+print(distance[end])
