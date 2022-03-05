@@ -29,25 +29,27 @@
 #   if check[i]:
 #     print(check[i], ans)
 
-# # # 3. 슬라이딩 윈도우로 풀이
+# # 3. 슬라이딩 윈도우로 풀이
 
-# import sys
-# input = sys.stdin.readline
+import sys
+input = sys.stdin.readline
 
-# n, m, e = map(int, input().split())
-# beans = list(map(int, input().split()))
-# beans.append(e)
-# beans.sort()
-# idx = beans.index(e)
-# end = idx
-# min_value = sys.maxsize
+n, m, e = map(int, input().split())
+beans = list(map(int, input().split()))
+beans.append(e)
+beans.sort()
+idx = beans.index(e)
+end = idx - 1
+min_value = sys.maxsize
 
-# for start in range(idx - m, idx+1):
-#   sum_beans = beans[end] - beans[start]
-#   end += 1
-#   min_value = min(sum_beans, min_value)
+for start in range(idx-m, idx+1):
+  end += 1
+  if start < 0 or end > n-1:
+    continue
+  sum_beans = beans[end] - beans[start]
+  min_value = min(sum_beans, min_value)
 
-# print(min_value)
+print(min_value)
 
 # # # 4. 
 # # 판을 벗어나는 것은 고려하지 않음
