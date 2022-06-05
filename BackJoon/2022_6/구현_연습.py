@@ -30,27 +30,58 @@
 # print(k)
 
 
-# 1614번 영식이의 손가락
+# # 1614번 영식이의 손가락
 
-# 처음엔 dp인줄 알았지만 손가락이 5개밖에없어서 하나하나 다 계산
+# # 처음엔 dp인줄 알았지만 손가락이 5개밖에없어서 하나하나 다 계산
+
+# import sys
+# input = sys.stdin.readline
+
+# n = int(input())
+# cnt = int(input())
+
+# first = n-1
+# if n == 1 or n == 5:
+#   ans = first + 8*cnt
+# else: # n이 2,3,4
+#   t = cnt // 2
+#   r = cnt % 2
+#   if n == 2:
+#     ans = first + 8*t + 6*r
+#   elif n == 3:
+#     ans = first + 8*t + 4*r
+#   else:
+#     ans = first + 8*t + 2*r
+
+# print(ans)
+
+
+# 2659번 십자카드 문제
+
+# 문제를 잘못 이해해서 한참을 헤맴..
+# 시계수를 하나하나 검사해줘야했음
 
 import sys
 input = sys.stdin.readline
 
-n = int(input())
-cnt = int(input())
+card = list(input().split())
 
-first = n-1
-if n == 1 or n == 5:
-  ans = first + 8*cnt
-else: # n이 2,3,4
-  t = cnt // 2
-  r = cnt % 2
-  if n == 2:
-    ans = first + 8*t + 6*r
-  elif n == 3:
-    ans = first + 8*t + 4*r
-  else:
-    ans = first + 8*t + 2*r
+def is_clock(card):
+  card += card
+  clock_num = int("".join(card[0:4]))
+  for i in range(1, 4):
+    item = "".join(card[i:i+4])
+    clock_num = min(int(item), clock_num) # 시계수 구하기
+  return clock_num
 
-print(ans)
+clock_num = is_clock(card)
+
+cnt = 0
+for num in range(1111, clock_num):
+  l = list(str(num))
+  if '0' in l:
+    continue
+  if num == is_clock(l):
+    cnt += 1
+
+print(cnt+1)
