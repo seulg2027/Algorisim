@@ -56,32 +56,90 @@
 # print(ans)
 
 
-# 2659번 십자카드 문제
+# # 2659번 십자카드 문제
 
-# 문제를 잘못 이해해서 한참을 헤맴..
-# 시계수를 하나하나 검사해줘야했음
+# # 문제를 잘못 이해해서 한참을 헤맴..
+# # 시계수를 하나하나 검사해줘야했음
+
+# import sys
+# input = sys.stdin.readline
+
+# card = list(input().split())
+
+# def is_clock(card):
+#   card += card
+#   clock_num = int("".join(card[0:4]))
+#   for i in range(1, 4):
+#     item = "".join(card[i:i+4])
+#     clock_num = min(int(item), clock_num) # 시계수 구하기
+#   return clock_num
+
+# clock_num = is_clock(card)
+
+# cnt = 0
+# for num in range(1111, clock_num):
+#   l = list(str(num))
+#   if '0' in l:
+#     continue
+#   if num == is_clock(l):
+#     cnt += 1
+
+# print(cnt+1)
+
+
+# 2503 숫자 야구
 
 import sys
+import numpy
 input = sys.stdin.readline
 
-card = list(input().split())
+n = int(input())
+candidate = [1 for _ in range(110, 1000)]
 
-def is_clock(card):
-  card += card
-  clock_num = int("".join(card[0:4]))
-  for i in range(1, 4):
-    item = "".join(card[i:i+4])
-    clock_num = min(int(item), clock_num) # 시계수 구하기
-  return clock_num
+# 111 부터 999까지 수들 중 안되는 수를 제외
+for i in range(110, 1000):
+  if '0' in list(str(i)):
+    candidate[i-110]= 0
 
-clock_num = is_clock(card)
+c = numpy.array(candidate)
 
-cnt = 0
-for num in range(1111, clock_num):
-  l = list(str(num))
-  if '0' in l:
-    continue
-  if num == is_clock(l):
-    cnt += 1
+for _ in range(n):
+  number, a, b = map(int, input().split())
+  candidate[number] = 0
+  
+  # 스트라이크
+  if a > 0:
+    list_num = list(str(number))
+    for m in range(110, 1000):
+      if candidate[m-110]:
+        cnt_a = 0
+        list_m = list(str(m))
+        for j in range(3):
+          if list_num[j] == list_m[j]:
+            cnt_a += 1
+        if cnt_a < a:
+          candidate[m-110] = 0
+  
+  # 볼
+  if b > 0:
+    set_num = set(list(str(number)))
+    for m in range(110, 1000):
+      if candidate[m-110]:
+        set_m = set(list(str(m)))
+        re = set_num - set_m
+        if 3-len(re) < b:
+          candidate[m-110] = 0
+    
+    # 볼이 있는데 스트라이크가 0
+    if a == 0:
+      list_num = list(str(number))
+      for m in range(110, 1000):
+        if candidate[m-110]:
+          list_m = list(str(m))
+          for j in range(3):
+            if list_num[j] == list_m[j]:
+              candidate[m-110] = 0
+              break
 
-print(cnt+1)
+
+print(numpy.where(c==1))
