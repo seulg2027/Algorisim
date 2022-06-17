@@ -87,59 +87,66 @@
 # print(cnt+1)
 
 
-# 2503 숫자 야구
+# # 2503 숫자 야구
+
+# # 다시 풀어..!
+# # 조건 때문에 오래걸렸다ㅜ 121같이 같은 수가 포함되어있는 것을 고려 안해줘서 헤맸음
+
+# import sys
+# input = sys.stdin.readline
+
+# n = int(input())
+# candidate = [1 for _ in range(110, 1000)]
+
+# # 111 부터 999까지 수들 중 안되는 수를 제외
+# for i in range(110, 1000):
+#   if '0' in list(str(i)):
+#     candidate[i-110]= 0
+#   if len(set(list(str(i)))) < 3:
+#     candidate[i-110]= 0
+
+# def numball(number, a, b):
+#   list_num = list(str(number))
+#   for m in range(110, 1000):
+#     if candidate[m-110]:
+#       strike = 0
+#       ball = 0
+#       list_m = list(str(m))
+#       set_ball = []
+#       for j in range(3):
+#         if list_num[j] == list_m[j]:
+#           strike += 1
+#         elif list_m[j] in list_num and list_m[j] not in set_ball:
+#           ball += 1
+#           set_ball.append(list_m[j])
+#       if strike != a or ball != b:
+#         candidate[m-110] = 0
+
+# for _ in range(n):
+#   number, a, b = map(int, input().split())
+#   candidate[number-110] = 0
+  
+#   numball(number, a, b)
+
+# print(candidate.count(1))
+
+# 1789번 수들의 합
+
+# 너모 쉬움
 
 import sys
-import numpy
 input = sys.stdin.readline
 
-n = int(input())
-candidate = [1 for _ in range(110, 1000)]
+s = int(input())
+num = 0
 
-# 111 부터 999까지 수들 중 안되는 수를 제외
-for i in range(110, 1000):
-  if '0' in list(str(i)):
-    candidate[i-110]= 0
+for i in range(1, sys.maxsize):
+  num += i
+  if s == num:
+    ans = i
+    break
+  elif s < num:
+    ans = i-1
+    break
 
-c = numpy.array(candidate)
-
-for _ in range(n):
-  number, a, b = map(int, input().split())
-  candidate[number] = 0
-  
-  # 스트라이크
-  if a > 0:
-    list_num = list(str(number))
-    for m in range(110, 1000):
-      if candidate[m-110]:
-        cnt_a = 0
-        list_m = list(str(m))
-        for j in range(3):
-          if list_num[j] == list_m[j]:
-            cnt_a += 1
-        if cnt_a < a:
-          candidate[m-110] = 0
-  
-  # 볼
-  if b > 0:
-    set_num = set(list(str(number)))
-    for m in range(110, 1000):
-      if candidate[m-110]:
-        set_m = set(list(str(m)))
-        re = set_num - set_m
-        if 3-len(re) < b:
-          candidate[m-110] = 0
-    
-    # 볼이 있는데 스트라이크가 0
-    if a == 0:
-      list_num = list(str(number))
-      for m in range(110, 1000):
-        if candidate[m-110]:
-          list_m = list(str(m))
-          for j in range(3):
-            if list_num[j] == list_m[j]:
-              candidate[m-110] = 0
-              break
-
-
-print(numpy.where(c==1))
+print(ans)
