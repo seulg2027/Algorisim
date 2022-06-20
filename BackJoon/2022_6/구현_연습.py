@@ -130,23 +130,42 @@
 
 # print(candidate.count(1))
 
-# 1789번 수들의 합
+# # 1789번 수들의 합
 
-# 너모 쉬움
+# # 너모 쉬움
 
-import sys
-input = sys.stdin.readline
+# import sys
+# input = sys.stdin.readline
 
-s = int(input())
-num = 0
+# s = int(input())
+# num = 0
 
-for i in range(1, sys.maxsize):
-  num += i
-  if s == num:
-    ans = i
-    break
-  elif s < num:
-    ans = i-1
-    break
+# for i in range(1, sys.maxsize):
+#   num += i
+#   if s == num:
+#     ans = i
+#     break
+#   elif s < num:
+#     ans = i-1
+#     break
 
-print(ans)
+# print(ans)
+
+# # 1758번 알바생 강호
+
+# import sys
+# input = sys.stdin.readline
+
+# n = int(input())
+# tips = []
+# ans = 0
+
+# for i in range(n):
+#   tips.append(int(input()))
+# tips.sort(reverse=True)
+
+# for j in range(n):
+#   if tips[j] - j > 0:
+#     ans += tips[j] - j
+
+# print(ans)
