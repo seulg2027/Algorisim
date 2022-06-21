@@ -169,3 +169,44 @@
 #     ans += tips[j] - j
 
 # print(ans)
+
+# # 1213번 팰린드롬
+
+# # 정해진거 없음 진짜 구현
+# # 반례 모두 고려했으나,, for문 주의해야징
+
+# import sys
+# input = sys.stdin.readline
+
+# name = list(input().rstrip())
+# alphabet = dict()
+
+# for n in name:
+#   if alphabet.get(n) != None:
+#     alphabet[n] += 1
+#   else:
+#     alphabet[n] = 1
+
+# sorted_alphabet = sorted(alphabet.items())
+# odd_num = 0
+# even_a = ""
+# odd_a = ""
+
+# for tu in sorted_alphabet:
+#   if tu[1] % 2 == 0: # 짝수일 경우
+#     even_a += tu[0] * (tu[1]//2)
+#   else: # 홀수일 경우
+#     even_a += tu[0] * (tu[1]//2)
+#     odd_a += tu[0]
+#     odd_num += 1
+#     if odd_num > 1:
+#       print("I'm Sorry Hansoo")
+#       sys.exit(0)
+
+# even_re = list(even_a)
+# even_re.reverse()
+# even_re = "".join(even_re)
+
+# ans = even_a + odd_a + even_re
+
+# print(ans)
