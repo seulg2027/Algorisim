@@ -210,3 +210,38 @@
 # ans = even_a + odd_a + even_re
 
 # print(ans)
+
+
+# # 2564번 경비원
+
+# import sys
+# input = sys.stdin.readline
+
+# x, y = map(int, input().split())
+# total = x*2 + y*2
+# n = int(input())
+# shops = []
+# for _ in range(n+1):
+#   a, b = map(int, input().split())
+#   if a == 1:
+#     shops.append(b)
+#   elif a == 2:
+#     shops.append(x+y+(x-b))
+#   elif a == 3:
+#     shops.append(total-b)
+#   elif a == 4:
+#     shops.append(x+b)
+
+# home = shops[-1]
+# shops = shops[:-1]
+
+# def get_distance(x):
+#   cal = abs(home - x)
+#   return min(cal, total-cal)
+
+# ans = 0
+# for i in range(n):
+#   value = get_distance(shops[i])
+#   ans += value
+
+# print(ans)
