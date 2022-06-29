@@ -245,3 +245,37 @@
 #   ans += value
 
 # print(ans)
+
+# # 20125번 쿠키의 신체 측정
+
+# import sys
+# input = sys.stdin.readline
+
+# n = int(input())
+# graph = []
+# for i in range(n):
+#   graph.append(list(input().rstrip()))
+
+# head = []
+# cookie = [0] * 5
+
+# for i in range(n):
+#   for j in range(n):
+#     if graph[i][j] == '*' and not head:
+#       head = [i, j]
+#     if head:
+#       if graph[i][j] == '*':
+#         if i == head[0]+1 and j < head[1]:
+#           cookie[0] += 1
+#         elif i == head[0]+1 and j > head[1]:
+#           cookie[1] += 1
+#         elif i > head[0]+1 and j == head[1]:
+#           cookie[2] += 1
+#         elif i > head[0]+1 and j < head[1]:
+#           cookie[3] += 1
+#         elif i > head[0]+1 and j > head[1]:
+#           cookie[4] += 1
+
+# print(head[0]+2, head[1]+1)
+# for c in cookie:
+#   print(c, end=' ')
