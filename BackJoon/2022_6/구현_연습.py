@@ -279,3 +279,31 @@
 # print(head[0]+2, head[1]+1)
 # for c in cookie:
 #   print(c, end=' ')
+
+# # 1966번 프린터 큐
+
+# # 우선순위로 큐 식별하면 우선순위가 같은 경우가 있을 수 있으므로 불가능
+
+# import sys
+# input = sys.stdin.readline
+
+# for _ in range(int(input())):
+#   n, m = map(int, input().split())
+#   docs = list(map(int, input().split()))
+#   doc_number = [i for i in range(len(docs))]
+#   seq = 0
+  
+#   while True:
+#     if docs[0] == max(docs): # 문서를 뺄 때
+#       now = docs.pop(0)
+#       num = doc_number.pop(0)
+#       seq += 1
+#       if num == m:
+#         break
+#     else: # 다시 넣을 때
+#       now = docs.pop(0)
+#       docs.append(now)
+#       num = doc_number.pop(0)
+#       doc_number.append(num)
+  
+#   print(seq)
