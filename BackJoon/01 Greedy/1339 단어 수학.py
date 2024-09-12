@@ -10,19 +10,17 @@ ACDEB
 '''
 
 import sys
+from collections import defaultdict
 input = sys.stdin.readline
 
 n = int(input())
 words = list(input().rstrip() for _ in range(n))
-alpha_code = dict()
+alpha_code = defaultdict(int)
 
 # 가중치를 부여하기, 가중치는 10^(자릿수)
 for i in range(n):
     for j in range(len(words[i])):
-        if words[i][j] in alpha_code:
-            alpha_code[words[i][j]] += 10 ** (len(words[i]) - j - 1)
-        else:
-            alpha_code[words[i][j]] = 10 ** (len(words[i]) - j - 1)
+        alpha_code[words[i][j]] += 10 ** (len(words[i]) - j - 1)
 
 code_list = sorted(alpha_code.items(), key=lambda x: x[1], reverse=True)
 
