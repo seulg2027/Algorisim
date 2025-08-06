@@ -1,4 +1,4 @@
-import java.util.*;
+//import java.util.*;
 
 public class prg_택배배달과수거 {
     // 첫번째 시도 : 시간초과(90점)

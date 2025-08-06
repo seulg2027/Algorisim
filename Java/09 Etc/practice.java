@@ -56,7 +56,7 @@ public class practice {
         String[] strArr = list.stream().map(String::valueOf).toArray(String[]::new);
         bw.write(Arrays.toString(strArr) +  "\n");
 
-        Integer[] integerArr = list.stream().toArray(Integer[]::new);
+        list.stream().toArray(Integer[]::new);
         
         /*
          * Array -> List 로 변경하기
@@ -68,7 +68,7 @@ public class practice {
         /*
          * Array Generic 형변환
          */
-        String[] changeArr = Arrays.stream(arr).boxed().map(String::valueOf).toArray(String[]::new);
+        Arrays.stream(arr).boxed().map(String::valueOf).toArray(String[]::new);
 
         bw.flush();
         bw.close();
